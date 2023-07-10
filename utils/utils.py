@@ -10,6 +10,7 @@ import random
 from copy import deepcopy
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+from torch import save
 
 def heic2jpg(heic_dir, jpg_dir):
     """
@@ -118,3 +119,45 @@ def visualize_augmentations(dataset, idx_to_class, image_paths, idx=0, samples=1
         ax.ravel()[i].set_title(idx_to_class[lab])
     plt.tight_layout(pad=1)
     plt.show()
+
+    
+def get_image_paths(data_dir):
+
+    train_data_path = os.path.join(data_dir, 'train')
+
+    test_data_path = os.path.join(data_dir, 'test')
+
+    train_image_paths = []  # to store image paths in list
+    classes = []  # to store class values
+
+    #1.
+    # get all the paths from train_data_path and append image paths and class to to respective lists
+    # eg. train path-> 'images/train/26.Pont_du_Gard/4321ee6695c23c7b.jpg'
+    # eg. class -> 26.Pont_du_Gard
+    for data_path in glob.glob(train_data_path + '/*'):
+        classes.append(data_path.split('/')[-1])
+        train_image_paths.append(glob.glob(data_path + '/*'))
+
+    train_image_paths = list(flatten(train_image_paths))
+    random.shuffle(train_image_paths)
+
+    print('train_image_path example: ', train_image_paths[0])
+    print('class example: ', classes[0])
+
+    #2.
+    # split train valid from train paths (80,20)
+    train_image_paths, valid_image_paths = train_image_paths[:int(
+        0.8*len(train_image_paths))], train_image_paths[int(0.8*len(train_image_paths)):]
+
+    #3.
+    # create the test_image_paths
+    test_image_paths = []
+    for data_path in glob.glob(test_data_path + '/*'):
+        test_image_paths.append(glob.glob(data_path + '/*'))
+
+    test_image_paths = list(flatten(test_image_paths))
+
+    print("Train size: {}\nValid size: {}\nTest size: {}".format(
+        len(train_image_paths), len(valid_image_paths), len(test_image_paths)))
+    
+    return train_image_paths, valid_image_paths, test_image_paths, classes
