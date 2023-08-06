@@ -1,12 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torchvision.transforms as transforms
-import torchvision
 from torch.utils.data import DataLoader
-from torchvision.models import resnet18, ResNet18_Weights
-from tqdm import trange
-from torch import save
 # new imports
 import argparse
 
@@ -137,5 +132,3 @@ if __name__=='__main__':
 
     # Training Loop
     trained_model = train_model(model, train_loader, valid_loader, criterion, optimizer, scheduler, num_epochs, save_checkpoint=args.save_checkpoint)
-
-    print(train_model)
