@@ -1,6 +1,7 @@
 from azure.ai.ml import MLClient
 from azure.identity import DefaultAzureCredential
-from azure.ai.ml.entities import Environment
+from azure.ai.ml.entities import Environment, Data
+from azure.ai.ml.constants import AssetTypes
 
 from dotenv import load_dotenv
 from pathlib import Path
@@ -31,7 +32,20 @@ def get_workspace(verbose=False):
 
 ml_client = get_workspace()
 
-fruit_env = Environment(
+# setup up data
+train_path = 'azureml://subscriptions/5577d63d-1715-4e34-a55c-e70ee101434b/resourcegroups/Azure-ML/workspaces/azureml-luis/datastores/fruitclassification/paths/train/'
+
+train_data = Data(
+    path = train_path,
+    type=AssetTypes.URI_FOLDER,
+    description = "train URI folder from fruit classification data lake",
+    name = "train_folder",
+    version = '1'
+)
+
+ml_client.data.create_or_update(train_data)
+
+""" fruit_env = Environment(
     name='fruit_env',
     conda_file='environment.yml'
-)
+) """
