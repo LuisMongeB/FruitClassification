@@ -21,10 +21,7 @@ def get_workspace(verbose=False):
         print(f"Resource Group:  {resource_group} | Subscription: {subscription_id} | {workspace_name}")
 
     ml_client = MLClient(
-        credential=credential,
-        subscription_id=subscription_id,
-        resource_group_name=resource_group,
-        workspace_name=workspace_name,
+        credential=credential, subscription_id=subscription_id, resource_group_name=resource_group, workspace_name=workspace_name,
     )
 
     return ml_client
