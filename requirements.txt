@@ -8,5 +8,5 @@ Pillow==10.0.0
 pillow_heif==0.10.0
 python-dotenv==1.0.0
 torch==2.0.0
-torchvision==0.15.0
+torchvision==0.15.1
 tqdm==4.65.0
