@@ -46,10 +46,6 @@ def train_model(model, train_loader, valid_loader, criterion, optimizer, schedul
         
         print(f"Epoch {epoch+1}/{num_epochs} - Loss: {epoch_loss:.4f} - Accuracy: {epoch_accuracy:.4f}")
         
-        if epoch_accuracy > best_accuracy:
-            best_accuracy = epoch_accuracy
-            best_model_weights = copy.deepcopy(model.state_dict())
-        
         model.eval()
         val_running_loss = 0.0
         val_correct_predictions = 0
@@ -72,6 +68,10 @@ def train_model(model, train_loader, valid_loader, criterion, optimizer, schedul
         val_epoch_accuracy = val_correct_predictions / val_total_predictions
         
         print(f"Validation Loss: {val_epoch_loss:.4f} - Validation Accuracy: {val_epoch_accuracy:.4f}")
+
+        if val_epoch_accuracy > best_accuracy:
+            best_accuracy = val_epoch_accuracy
+            best_model_weights = copy.deepcopy(model.state_dict())
         
         scheduler.step()
     
