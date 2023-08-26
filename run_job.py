@@ -1,10 +1,8 @@
 from azure.ai.ml import MLClient, command, Input
 from azure.identity import DefaultAzureCredential
-from azure.ai.ml.entities import Environment, Data
 from azure.ai.ml.constants import AssetTypes, InputOutputModes
 
 from dotenv import load_dotenv
-from pathlib import Path
 import os
 
 
@@ -29,17 +27,17 @@ def get_workspace(verbose=False):
 
 ml_client = get_workspace()
 
-path = 'azureml://datastores/fruitclassification/paths/fruit_classification_datasets'
-data_type = AssetTypes.URI_FOLDER
-mode = InputOutputModes.RO_MOUNT
+dataset_path = os.environ['STORAGE_DATASET_PATH'] # path structure: azureml://datastores/<storage_account_name>/paths/<container_name>
+data_type = AssetTypes.URI_FOLDER # specifies that that data asset will be a directory, instead of a file
+mode = InputOutputModes.RO_MOUNT # only read necessary
 
 inputs = {
-    "input_data": Input(type=data_type, path=path, mode=mode)
+    "input_data": Input(type=data_type, path=dataset_path, mode=mode)
 }
 
 command_job = command(
     code="./",
-    command="python train.py --data_dir ${{inputs.input_data}}",
+    command="python train.py --data_dir ${{inputs.input_data}} --n_epochs 1",
     inputs=inputs,
     environment="fruit_env@latest",
     compute="cpu-cluster",
