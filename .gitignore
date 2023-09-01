@@ -2,3 +2,4 @@
 /fruits
 /output
 .env
+*.pyc
