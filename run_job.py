@@ -1,31 +1,12 @@
 import argparse
 import random
 import os
-from azure.ai.ml import MLClient, command, Input
-from azure.identity import DefaultAzureCredential
+from azure.ai.ml import command, Input
 from azure.ai.ml.constants import AssetTypes, InputOutputModes
+from utils.azure_utils import get_workspace
 
 from dotenv import load_dotenv
 
-
-
-def get_workspace(verbose=False):
-
-    load_dotenv()
-
-    subscription_id = os.environ['SUBSCRIPTION_ID']
-    resource_group = os.environ['RESOURCE_GROUP']
-    workspace_name = os.environ['WORKSPACE_NAME']
-    credential = DefaultAzureCredential()
-
-    if verbose:
-        print(f"Resource Group:  {resource_group} | Subscription: {subscription_id} | {workspace_name}")
-
-    ml_client = MLClient(
-        credential=credential, subscription_id=subscription_id, resource_group_name=resource_group, workspace_name=workspace_name,
-    )
-
-    return ml_client
 
 if __name__=='__main__':
 
@@ -51,7 +32,7 @@ if __name__=='__main__':
         inputs=inputs,
         environment="fruit_env@latest",
         compute="cpu-cluster",
-        name=f"{args.experiment_name}_{args.n_epochs}_{random.randint(4000, 50000)}epochs"
+        name=f"{args.experiment_name}_{args.n_epochs}epochs_{random.randint(4000, 50000)}"
     )
 
     ml_client.jobs.create_or_update(command_job)
