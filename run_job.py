@@ -5,9 +5,6 @@ from azure.ai.ml import command, Input
 from azure.ai.ml.constants import AssetTypes, InputOutputModes
 from utils.azure_utils import get_workspace
 
-from dotenv import load_dotenv
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--experiment_name", default=f"fruit_classification_training")
@@ -17,11 +14,11 @@ if __name__ == "__main__":
     ml_client = get_workspace()
 
     dataset_path = os.environ[
-        "STORAGE_DATASET_PATH"
-    ]  # path structure: azureml://datastores/<storage_account_name>/paths/<container_name>
+        "STORAGE_DATASET_PATH"  # path structure: azureml://datastores/<storage_account_name>/paths/<container_name>
+    ]
     data_type = (
-        AssetTypes.URI_FOLDER
-    )  # specifies that that data asset will be a directory, instead of a file
+        AssetTypes.URI_FOLDER  # specifies that that data asset will be a directory, instead of a file
+    )
     mode = InputOutputModes.RO_MOUNT  # only read necessary
 
     inputs = {
