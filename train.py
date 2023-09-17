@@ -1,10 +1,8 @@
+import argparse
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
-# new imports
-import argparse
-
 from models.model import PretrainedResNet
 from utils.transforms import get_transforms
 from utils.dataset import FruitDataset
@@ -92,8 +90,6 @@ if __name__=='__main__':
     parser.add_argument('--n_epochs', type=int, default=5)
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--save_checkpoint', type=bool, default=True)
-    
-    # parser.add_argument()
 
     args = parser.parse_args()
 
@@ -121,7 +117,7 @@ if __name__=='__main__':
         )
     test_loader = DataLoader(
         test_dataset, batch_size=args.batch_size, shuffle=True
-    )
+        )
     
     # Training parameters
     device = torch.device("mps" if torch.has_mps else "cpu")
@@ -131,4 +127,12 @@ if __name__=='__main__':
     num_epochs = args.n_epochs
 
     # Training Loop
-    trained_model = train_model(model, train_loader, valid_loader, criterion, optimizer, scheduler, num_epochs, save_checkpoint=args.save_checkpoint)
+    trained_model = train_model(
+                        model, 
+                        train_loader,
+                        valid_loader,
+                        criterion,
+                        optimizer,
+                        scheduler,
+                        num_epochs,
+                        save_checkpoint=args.save_checkpoint)
