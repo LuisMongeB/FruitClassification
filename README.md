@@ -15,6 +15,7 @@ However, I strongly recommend that you collect your own images of two distinct t
 
 The collected dataset should be stored in the following structure:
 
+```
 .
 └── fruit_classification_datasets/
     ├── train/
@@ -35,6 +36,7 @@ The collected dataset should be stored in the following structure:
     │       ├── fruit2_test_image1.jpg
     │       ├── fruit2_test_image2.jpg
     │       └── fruit2_test_image3.jpg
+```
 
 # Creating environment
 
