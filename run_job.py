@@ -10,12 +10,14 @@ if __name__ == "__main__":
     parser.add_argument("--experiment_name", default=f"fruit_classification_training")
     parser.add_argument("--n_epochs", type=int, default=3)
     parser.add_argument("--batch_size", type=int, default=8)
-    parser.add_argument('--save_checkpoint', type=bool, action="store_true")
+    parser.add_argument("--save_checkpoint", action="store_true")
     args = parser.parse_args()
 
     ml_client = get_workspace()
 
-    dataset_path = os.environ["STORAGE_DATASET_PATH"]  # path structure: azureml://datastores/<storage_account_name>/paths/<container_name>
+    dataset_path = os.environ[
+        "STORAGE_DATASET_PATH"
+    ]  # path structure: azureml://datastores/<storage_account_name>/paths/<container_name>
     data_type = (
         AssetTypes.URI_FOLDER  # specifies that that data asset will be a directory, instead of a file
     )
@@ -25,7 +27,7 @@ if __name__ == "__main__":
         "input_data": Input(type=data_type, path=dataset_path, mode=mode),
         "n_epochs": args.n_epochs,
         "batch_size": args.batch_size,
-        "save_checkpoint": args.save_checkpoint
+        "save_checkpoint": args.save_checkpoint,
     }
 
     command_job = command(
