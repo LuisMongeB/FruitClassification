@@ -7,9 +7,20 @@ This project offers a PyTorch-based solution to classify fruits utilizing Azure 
 - Conda for environment creation
 - Azure Subscription
 - Azure Machine Learning Workspace
-- Azure Machine Learning Python SDK v2
-- PyTorch
 
+# Creating environment
+
+In order to avoid dependency issues, you can create a a Conda environment using the following command:
+
+```
+conda create -n <ENV> python==3.10.12 
+```
+```
+conda activate <ENV>  
+```
+```
+pip install -r requirements.txt  
+```
 # Usage
 
 To launch a job using Azure Machine Learning resources, you can run the following command in the terminal:
@@ -27,10 +38,10 @@ python train.py --data_dir PATH_TO_DATA_DIRECTORY --n_epochs N_EPOCHS --batch_si
 # Environment Variables
 Used python-dotenv in order to load environment variables without having to push them here. You can create a ```.env``` file in which to store:
 
-1. SUBSCRIPTION_ID
-2. RESOURCE_GROUP
-3. WORKSPACE_NAME
-4. STORAGE_DATASET_PATH
+-  SUBSCRIPTION_ID
+-  RESOURCE_GROUP
+-  WORKSPACE_NAME
+-  STORAGE_DATASET_PATH
 
 # Azure Configuration
 
