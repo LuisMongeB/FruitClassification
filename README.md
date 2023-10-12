@@ -8,6 +8,34 @@ This project offers a PyTorch-based solution to classify fruits utilizing Azure 
 - Azure Subscription
 - Azure Machine Learning Workspace
 
+# Dataset
+My dataset was composed of a couple hundred images of two fruits: black berries and golden berries. If you would like to have it for this project feel free to contact me.
+
+However, I strongly recommend that you collect your own images of two distinct types fruits. During data collection you often learn very useful insights that will inform other phases of the ML life cycle.
+
+The collected dataset should be stored in the following structure:
+
+.
+└── fruit_classification_datasets/
+    ├── train/
+    │   ├── fruit1/
+    │   │   ├── fruit1_train_image1.jpg
+    │   │   ├── fruit1_train_image2.jpg
+    │   │   └── fruit2_train_image3.jpg
+    │   └── fruit2/
+    │       ├── fruit2_train_image1.jpg
+    │       ├── fruit2_train_image2.jpg
+    │       └── fruit2_train_image3.jpg
+    ├── test/
+    │   ├── fruit1/
+    │   │   ├── fruit1_test_image1.jpg
+    │   │   ├── fruit1_test_image2.jpg
+    │   │   └── fruit1_test_image3.jpg
+    │   └── fruit2/
+    │       ├── fruit2_test_image1.jpg
+    │       ├── fruit2_test_image2.jpg
+    │       └── fruit2_test_image3.jpg
+
 # Creating environment
 
 In order to avoid dependency issues, you can create a a Conda environment using the following command:
