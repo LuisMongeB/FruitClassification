@@ -9,6 +9,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--experiment_name", default=f"fruit_classification_training")
     parser.add_argument("--n_epochs", type=int, default=3)
+    parser.add_argument("--batch_size", type=int, default=8)
+    parser.add_argument('--save_checkpoint', type=bool, default=True)
     args = parser.parse_args()
 
     ml_client = get_workspace()
@@ -24,11 +26,13 @@ if __name__ == "__main__":
     inputs = {
         "input_data": Input(type=data_type, path=dataset_path, mode=mode),
         "n_epochs": args.n_epochs,
+        "batch_size": args.batch_size,
+        "save_checkpoint": args.save_checkpoint
     }
 
     command_job = command(
         code="./",
-        command="python train.py --data_dir ${{inputs.input_data}} --n_epochs ${{inputs.n_epochs}}",
+        command="python train.py --data_dir ${{inputs.input_data}} --n_epochs ${{inputs.n_epochs}} --batch_size ${{inputs.batch_size}} --save_checkpoint ${{inputs.save_checkpoint}}",
         inputs=inputs,
         environment="fruit_env@latest",
         compute="cpu-cluster",
