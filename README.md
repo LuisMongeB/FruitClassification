@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 To launch a job using Azure Machine Learning resources, you can run the following command in the terminal:
 ```
-python run_job.py --experiment_name YOUR_EXPERIMENT_NAME --n_epochs YOUR_EPOCH_NUMBER --batch_size BATCH_SIZE --save_checkpoint
+python run_job.py --experiment_name test_job --n_epochs 3 --batch_size 8 --save_checkpoint
 ```
 
 If you want to launch the training locally, avoid run_job.py and go for train.py with the following command:
@@ -55,5 +55,12 @@ Before executing the script, ensure that you've properly set up the Azure ML env
 
 **Compute:** The training command is designed to run on the "cpu-cluster" compute target. Ensure you have this compute target set up in your workspace.
 
-**Environment:** The script uses the "fruit_env@latest" Azure ML environment for training. This environment should be pre-configured with all necessary dependencies.
+**Environment:** The script uses the "fruit_env@latest" Azure ML environment for training. This environment should be pre-configured with all necessary dependencies. For the creation of the enviornment, check out the blog post. 
 
+# Contribution
+Contributions, issues, and feature requests are welcome!
+Give a ⭐️ if you like this project!
+
+# Let's Connect
+* On [Github](https://github.com/LuisMongeB) :star:
+* On [Linkedin](https://www.linkedin.com/in/luis-diego-monge-bolanos/) :bulb:
