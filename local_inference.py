@@ -58,7 +58,9 @@ def main():
         predictions, orient="index", columns=["Predictions", "Confidence"]
     ).reset_index()
     pred_df["correct_label"] = pred_df["index"].str.split("_", expand=True)[0]
-    pred_df.to_csv(Path("./outputs/predictions_test.csv"))
+    if not os.path.exists(f"{os.getcwd()}/outputs"):
+        os.mkdir(f"{os.getcwd()}/outputs")
+    pred_df.to_csv(Path(f"{os.getcwd()}/outputs/predictions_test.csv"))
     print(pred_df)
     return
 
