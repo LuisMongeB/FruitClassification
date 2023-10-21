@@ -1,7 +1,7 @@
 # Fruit Classifier with PyTorch!
 Going back to visit my family after a long time of not being in Costa Rica. Fruits were maturing slowly over the weeks I was there. Decided to take pictures and use a pretrained ResNet CNN with PyTorch for doing image classification. 
 
-This project offers a PyTorch-based solution to classify fruits utilizing Azure Machine Learning. The primary script configures and launches a training job on Azure ML's infrastructure. You can check a guide to certain aspects of this code in [TEZT](URL)
+This project offers a PyTorch-based solution to classify fruits utilizing Azure Machine Learning. The primary script configures and launches a training job on Azure ML's infrastructure. You can check a guide to certain aspects of this code in this [Medium](https://medium.com/@luisdmonge/azure-dp-100-prep-hands-on-with-pytorch-and-azure-ml-sdk-v2-8ab9497eb88f) article.
 
 # Requirements
 - Conda for environment creation
