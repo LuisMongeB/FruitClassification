@@ -19,20 +19,24 @@ def get_workspace(verbose=False):
             f"Resource Group:  {resource_group} | Subscription: {subscription_id} | {workspace_name}"
         )
 
-    ml_client = MLClient(
-        credential=credential,
-        subscription_id=subscription_id,
-        resource_group_name=resource_group,
-        workspace_name=workspace_name,
-    )
-
+    try:
+        ml_client = MLClient(
+            credential=credential,
+            subscription_id=subscription_id,
+            resource_group_name=resource_group,
+            workspace_name=workspace_name,
+        )
+    except Exception:
+        print(f"Failed to connect to Azure ML Client {workspace_name}")
+        return
+    
     return ml_client
 
 
 def create_enviroment(ml_client, docker_context_path, name):
     """
+    Creates an Environment in the AzureML workspace given a Docker context path and a name.
     MLClient class should be already instatiated.
-    Creates an Environment in the AzureML workspace given a docker context path and a name.
     """
     print("Beginning creation of Azure ML environment...")
     env_docker_context = Environment(
